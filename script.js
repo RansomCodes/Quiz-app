@@ -1,6 +1,7 @@
 const question_title=document.getElementById("question")
 const answers=document.getElementById("options")
 const nextBtn=document.getElementById("btn")
+loadingScreen=document.getElementById("loading")
 const api_url="https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple";
 let questions=[]
 
@@ -8,8 +9,10 @@ async function fetch_data()
 {
     try
     {
+        loadingScreen.style.display = 'block';
         const response=await fetch(api_url)
         res=await response.json()
+        loadingScreen.style.display = 'none';
         res.results.forEach(question => {
             const format_question={
                 question: question.question,
